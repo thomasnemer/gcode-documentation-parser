@@ -28,7 +28,7 @@ class DocumentationUpdater:
         codes_list = []
         ids_to_update = set()
         if not self.PARSER_REGISTRY.PARSERS:
-            raise Exception(f"No parsers have been registered")
+            raise ValueError(f"No parsers have been registered")
         for _id, parser in self.PARSER_REGISTRY.PARSERS.items():
             if directories is None:
                 directory = None
@@ -41,7 +41,7 @@ class DocumentationUpdater:
             codes_list.append(gcodes)
             ids_to_update.add(parser.ID)
         if not codes_list:
-            raise Exception("No sources set to be updated")
+            raise ValueError("No sources set to be updated")
         if set(self.PARSER_REGISTRY.PARSERS) - ids_to_update:
             all_codes = self.load_existing_codes(
                 ids_to_update, output_directory,
@@ -85,7 +85,7 @@ class DocumentationUpdater:
         with open(path) as f:
             prefix = f.read(len(expected_prefix))
             if prefix != expected_prefix:
-                raise Exception(
+                raise ValueError(
                     f"Prefix in JS file ('{prefix}') didn't match expected "
                     f"prefix ('{expected_prefix}')")
             all_codes = json.load(f)

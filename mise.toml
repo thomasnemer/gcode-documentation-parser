@@ -1,0 +1,49 @@
+[tools]
+pre-commit = "latest"
+python = "3.10"
+uv = "latest"
+
+[tasks.test]
+description = "Run tests"
+run = "uv run pytest"
+
+[tasks.clean]
+description = "Clean python caches"
+run = """
+#!/usr/bin/env bash
+rm -rf .tox .mypy_cache .pytest_cache
+find -name __pycache__ -prune | xargs rm -rf
+find -name '*.py[co]' -delete
+"""
+
+[tasks.setup]
+description = "Install dependencies"
+run = "uv sync"
+
+[tasks.lint]
+description = "Lint all files"
+run = "pre-commit run --all-files"
+
+[tasks.publish-output]
+description = "publish output documentation"
+run = """
+#!/usr/bin/env bash
+
+set -eox pipefail
+
+uv run ./update_documentation.py
+rm -rf /tmp/output/
+cp -r output/ /tmp/
+git fetch --depth=1
+git switch output
+git clean -f -d
+rm -rf output/
+mv /tmp/output .
+git add -f output/
+if git diff --cached --exit-code >/dev/null ; then
+  echo "No changes to commit"
+  exit 0
+fi
+git commit -m "Update documentation output"
+git push
+"""

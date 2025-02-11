@@ -1,55 +1,58 @@
-[tool.poetry]
+[project]
 name = "gcode-documentation-parser"
 version = "0.1.0"
 description = "A utility that parses the documentation pages from Marlin, RepRap, and Klipper, to generate an index of commands usage"
-authors = [
-    "Costas Basdekis <code@basdekis.io>"
-]
-license = "MIT"
+authors = [{ name = "Costas Basdekis", email = "code@basdekis.io" }]
 readme = "README.md"
-homepage = "https://costas-basdekis.github.io/gcode-documentation-parser"
-repository = "https://costas-basdekis.github.io/gcode-documentation-parser"
-documentation = "https://costas-basdekis.github.io/gcode-documentation-parser"
-
-keywords = ["gcode", "marlin", "reprap", "klipper"]
-
+license = "MIT"
+keywords = [
+    "gcode",
+    "marlin",
+    "reprap",
+    "klipper",
+]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Environment :: Console",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Natural Language :: English",
-    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.10",
     "Topic :: Documentation",
+]
+dependencies = [
+    "beautifulsoup4",
+    "wikitextparser",
+]
+requires-python = ">=3.10"
+
+[project.urls]
+Homepage = "https://costas-basdekis.github.io/gcode-documentation-parser"
+Repository = "https://costas-basdekis.github.io/gcode-documentation-parser"
+Documentation = "https://costas-basdekis.github.io/gcode-documentation-parser"
+
+[dependency-groups]
+dev = [
+    "ipdb",
+    "ipython",
+    "moto",
+    "mypy",
+    "pycodestyle",
+    "pylint",
+    "pyyaml",
+    "pytest",
+    "pytest-env",
+    "python-dotenv",
+    "types-beautifulsoup4",
+    "types-six",
+    "types-PyYAML",
 ]
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
-
-[tool.poetry.dependencies]
-python = "^3.8"
-beautifulsoup4= ">=4,<4.10.0"
-wikitextparser = "^0.45.2"
-
-[tool.poetry.dev-dependencies]
-ipdb = ""
-ipython = ""
-moto = "2.2.9"
-mypy = "0.910"
-pre-commit = "2.15.0"
-pycodestyle = "2.7.0"
-pylint = "2.11.1"
-pytest = "6.2.5"
-pytest-env = "0.6.2"
-pytest-pythonpath = "0.7.3"
-python-dotenv = "0.19.1"
-types-beautifulsoup4 = "^4.10.11"
-types-six = "^1.16.10"
-types-PyYAML = "^6.0.4"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [tool.mypy]
-python_version = "3.8"
 disable_error_code = "misc"
 follow_imports = "silent"
 
@@ -64,7 +67,6 @@ disable = """,
     too-few-public-methods,
     fixme,
     missing-module-docstring,
-    no-self-use,
     invalid-name,
     unspecified-encoding,
     f-string-without-interpolation,
@@ -97,11 +99,4 @@ doctest_optionflags = [
     "ELLIPSIS",
     "IGNORE_EXCEPTION_DETAIL",
 ]
-# Here you can set environment variables that are needed for running tests, e.g.
-# for configuration.
-env = [
-    # By prefixing with `D:`, it only sets a default, if there is no such
-    # variable already defined. If you omit it, it will always override it.
-]
-# Add the sources to the test's PYTHONPATH
-python_paths = "gcode_documentation_parser"
+pythonpath = "gcode_documentation_parser"
