@@ -47,3 +47,7 @@ fi
 git commit -m "Update documentation output"
 git push
 """
+
+[tasks.ci]
+description = 'Run CI tasks'
+depends = ['lint', 'test']
