@@ -2175,23 +2175,11 @@ const AllGcodes = {
   ],
   "G29": [
     {
-      "brief": "Probe the bed and enable leveling compensation",
-      "codes": [
-        "G29"
-      ],
-      "id": "Marlin.G29[0]",
-      "parameters": [],
-      "related": [],
-      "source": "Marlin",
-      "title": "Bed Leveling",
-      "url": "https://marlinfw.org/docs/gcode/G029"
-    },
-    {
       "brief": "Probe the bed and enable leveling compensation.",
       "codes": [
         "G29"
       ],
-      "id": "Marlin.G29[1]",
+      "id": "Marlin.G29[0]",
       "parameters": [
         {
           "description": "**Activate** Unified Bed Leveling (i.e., `M420 S1`)",
@@ -2486,123 +2474,23 @@ const AllGcodes = {
       "url": "https://marlinfw.org/docs/gcode/G029-ubl"
     },
     {
-      "brief": "Measure Z heights in a grid, enable leveling compensation",
+      "brief": "Probe the bed and enable leveling compensation",
       "codes": [
         "G29"
       ],
-      "id": "Marlin.G29[2]",
-      "parameters": [
-        {
-          "description": "",
-          "label": "S<0|1|2|3|4|5>",
-          "optional": false,
-          "tag": "S",
-          "values": [
-            {
-              "description": "Produce a mesh report (see examples below).",
-              "tag": 0
-            },
-            {
-              "description": "Start probing mesh points.",
-              "tag": 1
-            },
-            {
-              "description": "Probe the next mesh point.",
-              "tag": 2
-            },
-            {
-              "description": "Manually modify a single point with `X` `Y` `Z` parameters. (See also [`M421`](/docs/gcode/M421.html).)",
-              "tag": 3
-            },
-            {
-              "description": "Set a global Z offset. Positive values are away from the bed; negative values are closer.",
-              "tag": 4
-            },
-            {
-              "description": "Reset and disable mesh.",
-              "tag": 5
-            }
-          ]
-        },
-        {
-          "description": "With `S3`, the (0...n-1) X index of the mesh value to modify.",
-          "label": "[I<index>]",
-          "optional": true,
-          "since": "2.0.0",
-          "tag": "I",
-          "values": [
-            {
-              "tag": "index",
-              "type": "int"
-            }
-          ]
-        },
-        {
-          "description": "With `S3`, the (0...n-1) Y index of the mesh value to modify.",
-          "label": "[J<index>]",
-          "optional": true,
-          "since": "2.0.0",
-          "tag": "J",
-          "values": [
-            {
-              "tag": "index",
-              "type": "int"
-            }
-          ]
-        },
-        {
-          "description": "With `S3`, the (1...n) X count of the mesh value to modify.",
-          "label": "[X<count>]",
-          "optional": true,
-          "tag": "X",
-          "until": "2.0.0",
-          "values": [
-            {
-              "tag": "count",
-              "type": "int"
-            }
-          ]
-        },
-        {
-          "description": "With `S3`, the (1...n) Y count of the mesh value to modify.",
-          "label": "[Y<count>]",
-          "optional": true,
-          "tag": "Y",
-          "until": "2.0.0",
-          "values": [
-            {
-              "tag": "count",
-              "type": "int"
-            }
-          ]
-        },
-        {
-          "description": "With `S3`, the new mesh Z value.",
-          "label": "[Z<linear>]",
-          "optional": true,
-          "tag": "Z",
-          "values": [
-            {
-              "tag": "linear",
-              "type": "float"
-            }
-          ]
-        }
-      ],
-      "related": [
-        "M420",
-        "M421"
-      ],
+      "id": "Marlin.G29[1]",
+      "parameters": [],
+      "related": [],
       "source": "Marlin",
-      "title": "Bed Leveling (Manual)",
-      "url": "https://marlinfw.org/docs/gcode/G029-mbl"
+      "title": "Bed Leveling",
+      "url": "https://marlinfw.org/docs/gcode/G029"
     },
     {
       "brief": "Probe the bed and enable leveling compensation.",
       "codes": [
         "G29"
       ],
-      "id": "Marlin.G29[3]",
+      "id": "Marlin.G29[2]",
       "parameters": [
         {
           "description": "Abort leveling procedure in-progress (`PROBE_MANUALLY`)",
@@ -2818,7 +2706,7 @@ const AllGcodes = {
       "codes": [
         "G29"
       ],
-      "id": "Marlin.G29[4]",
+      "id": "Marlin.G29[3]",
       "parameters": [
         {
           "description": "Abort leveling procedure in-progress (`PROBE_MANUALLY`)",
@@ -3029,6 +2917,118 @@ const AllGcodes = {
       "source": "Marlin",
       "title": "Bed Leveling (Bilinear)",
       "url": "https://marlinfw.org/docs/gcode/G029-abl-bilinear"
+    },
+    {
+      "brief": "Measure Z heights in a grid, enable leveling compensation",
+      "codes": [
+        "G29"
+      ],
+      "id": "Marlin.G29[4]",
+      "parameters": [
+        {
+          "description": "",
+          "label": "S<0|1|2|3|4|5>",
+          "optional": false,
+          "tag": "S",
+          "values": [
+            {
+              "description": "Produce a mesh report (see examples below).",
+              "tag": 0
+            },
+            {
+              "description": "Start probing mesh points.",
+              "tag": 1
+            },
+            {
+              "description": "Probe the next mesh point.",
+              "tag": 2
+            },
+            {
+              "description": "Manually modify a single point with `X` `Y` `Z` parameters. (See also [`M421`](/docs/gcode/M421.html).)",
+              "tag": 3
+            },
+            {
+              "description": "Set a global Z offset. Positive values are away from the bed; negative values are closer.",
+              "tag": 4
+            },
+            {
+              "description": "Reset and disable mesh.",
+              "tag": 5
+            }
+          ]
+        },
+        {
+          "description": "With `S3`, the (0...n-1) X index of the mesh value to modify.",
+          "label": "[I<index>]",
+          "optional": true,
+          "since": "2.0.0",
+          "tag": "I",
+          "values": [
+            {
+              "tag": "index",
+              "type": "int"
+            }
+          ]
+        },
+        {
+          "description": "With `S3`, the (0...n-1) Y index of the mesh value to modify.",
+          "label": "[J<index>]",
+          "optional": true,
+          "since": "2.0.0",
+          "tag": "J",
+          "values": [
+            {
+              "tag": "index",
+              "type": "int"
+            }
+          ]
+        },
+        {
+          "description": "With `S3`, the (1...n) X count of the mesh value to modify.",
+          "label": "[X<count>]",
+          "optional": true,
+          "tag": "X",
+          "until": "2.0.0",
+          "values": [
+            {
+              "tag": "count",
+              "type": "int"
+            }
+          ]
+        },
+        {
+          "description": "With `S3`, the (1...n) Y count of the mesh value to modify.",
+          "label": "[Y<count>]",
+          "optional": true,
+          "tag": "Y",
+          "until": "2.0.0",
+          "values": [
+            {
+              "tag": "count",
+              "type": "int"
+            }
+          ]
+        },
+        {
+          "description": "With `S3`, the new mesh Z value.",
+          "label": "[Z<linear>]",
+          "optional": true,
+          "tag": "Z",
+          "values": [
+            {
+              "tag": "linear",
+              "type": "float"
+            }
+          ]
+        }
+      ],
+      "related": [
+        "M420",
+        "M421"
+      ],
+      "source": "Marlin",
+      "title": "Bed Leveling (Manual)",
+      "url": "https://marlinfw.org/docs/gcode/G029-mbl"
     },
     {
       "brief": "Probe the bed and enable leveling compensation.",
@@ -4118,53 +4118,11 @@ const AllGcodes = {
   ],
   "G34": [
     {
-      "brief": "Align multiple Z steppers using a bed probe",
-      "codes": [
-        "G34"
-      ],
-      "id": "Marlin.G34[0]",
-      "parameters": [
-        {
-          "description": "Iterations - must be between 1 - 30",
-          "label": "[I]",
-          "optional": true,
-          "tag": "I"
-        },
-        {
-          "description": "Target accuracy - must be between 0.01 - 1.0",
-          "label": "[T]",
-          "optional": true,
-          "tag": "T"
-        },
-        {
-          "description": "Amplification - must be between 0.5 - 2.0",
-          "label": "[A]",
-          "optional": true,
-          "tag": "A"
-        },
-        {
-          "description": "Stow probe after probing each point.",
-          "label": "[E]",
-          "optional": true,
-          "tag": "E"
-        }
-      ],
-      "related": [
-        "G28",
-        "M422",
-        "M906",
-        "M907"
-      ],
-      "source": "Marlin",
-      "title": "Z Steppers Auto-Alignment",
-      "url": "https://marlinfw.org/docs/gcode/G034-zsaa"
-    },
-    {
       "brief": "Modern replacement for Pr\u016f\u0161a's TMC_Z_CALIBRATION",
       "codes": [
         "G34"
       ],
-      "id": "Marlin.G34[1]",
+      "id": "Marlin.G34[0]",
       "parameters": [
         {
           "description": "Current value to use for the raise move. (Default: `GANTRY_CALIBRATION_CURRENT`)",
@@ -4200,6 +4158,48 @@ const AllGcodes = {
       "source": "Marlin",
       "title": "Mechanical Gantry Calibration",
       "url": "https://marlinfw.org/docs/gcode/G034-mgc"
+    },
+    {
+      "brief": "Align multiple Z steppers using a bed probe",
+      "codes": [
+        "G34"
+      ],
+      "id": "Marlin.G34[1]",
+      "parameters": [
+        {
+          "description": "Iterations - must be between 1 - 30",
+          "label": "[I]",
+          "optional": true,
+          "tag": "I"
+        },
+        {
+          "description": "Target accuracy - must be between 0.01 - 1.0",
+          "label": "[T]",
+          "optional": true,
+          "tag": "T"
+        },
+        {
+          "description": "Amplification - must be between 0.5 - 2.0",
+          "label": "[A]",
+          "optional": true,
+          "tag": "A"
+        },
+        {
+          "description": "Stow probe after probing each point.",
+          "label": "[E]",
+          "optional": true,
+          "tag": "E"
+        }
+      ],
+      "related": [
+        "G28",
+        "M422",
+        "M906",
+        "M907"
+      ],
+      "source": "Marlin",
+      "title": "Z Steppers Auto-Alignment",
+      "url": "https://marlinfw.org/docs/gcode/G034-zsaa"
     },
     {
       "brief": "Use multiple Z steppers and a probe to align Z axis connection points. See M422 for other options.",
