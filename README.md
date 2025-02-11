@@ -25,7 +25,7 @@ You can also generate it locally by running the following, and checking the
 `output` folder
 
 ```shell
-poetry run ./update_documentation.py
+uv run ./update_documentation.py
 ```
 
 Usage
@@ -38,11 +38,11 @@ This was originally created in [Octoprint] plugin [MarlinGcodeDocumentation],
 and needs the parsed documentation data to function.
 
 [demo]:https://costas-basdekis.github.io/gcode-documentation
-[output branch]:https://github.com/costas-basdekis/gcode-documentation-parser/tree/output
-[all_codes.json]:https://raw.githubusercontent.com/costas-basdekis/gcode-documentation-parser/output/output/all_codes.json
-[all_codes_window.js]:https://raw.githubusercontent.com/costas-basdekis/gcode-documentation-parser/output/output/all_codes_window.js
-[all_codes_const.js]:https://raw.githubusercontent.com/costas-basdekis/gcode-documentation-parser/output/output/all_codes_const.js
-[all_codes_export.js]:https://raw.githubusercontent.com/costas-basdekis/gcode-documentation-parser/output/output/all_codes_export.js
+[output branch]:https://github.com/thomasnemer/gcode-documentation-parser/tree/output
+[all_codes.json]:https://raw.githubusercontent.com/thomasnemer/gcode-documentation-parser/output/output/all_codes.json
+[all_codes_window.js]:https://raw.githubusercontent.com/thomasnemer/gcode-documentation-parser/output/output/all_codes_window.js
+[all_codes_const.js]:https://raw.githubusercontent.com/thomasnemer/gcode-documentation-parser/output/output/all_codes_const.js
+[all_codes_export.js]:https://raw.githubusercontent.com/thomasnemer/gcode-documentation-parser/output/output/all_codes_export.js
 [gcode-documentation]:https://github.com/costas-basdekis/gcode-documentation
 [Octoprint]:https://octoprint.org/
 [MarlinGcodeDocumentation]:https://plugins.octoprint.org/plugins/marlingcodedocumentation/

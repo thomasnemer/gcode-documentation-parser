@@ -2,7 +2,11 @@
 name = "gcode-documentation-parser"
 version = "0.1.0"
 description = "A utility that parses the documentation pages from Marlin, RepRap, and Klipper, to generate an index of commands usage"
-authors = [{ name = "Costas Basdekis", email = "code@basdekis.io" }]
+authors = [
+  { name = "Costas Basdekis", email = "code@basdekis.io" },
+  { name = "Thomas Nemer", email = "atom@fortytwo.fr" },
+
+]
 readme = "README.md"
 license = "MIT"
 keywords = [
@@ -27,9 +31,9 @@ dependencies = [
 requires-python = ">=3.10"
 
 [project.urls]
-Homepage = "https://costas-basdekis.github.io/gcode-documentation-parser"
-Repository = "https://costas-basdekis.github.io/gcode-documentation-parser"
-Documentation = "https://costas-basdekis.github.io/gcode-documentation-parser"
+Homepage = "https://github.com/thomasnemer/gcode-documentation-parser"
+Repository = "https://github.com/thomasnemr/gcode-documentation-parser"
+Documentation = "https://github.com/thomasnemer/gcode-documentation-parser"
 
 [dependency-groups]
 dev = [
@@ -75,15 +79,6 @@ disable = """,
     wrong-import-order,
     """
 score = "no"
-
-[tool.isort]
-multi_line_output = 3
-include_trailing_comma = true
-force_grid_wrap = 0
-use_parentheses = true
-ensure_newline_before_comments = true
-line_length = 88
-lines_after_imports = 2
 
 [tool.pytest.ini_options]
 minversion = "6.0"
