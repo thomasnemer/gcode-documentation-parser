@@ -27,6 +27,28 @@ const AllGcodes = {
       "url": "https://www.klipper3d.org/G-Codes.html#manual_probe_1"
     }
   ],
+  "CALIBRATE": [
+    {
+      "brief": "command",
+      "codes": [
+        "CALIBRATE"
+      ],
+      "id": "Klipper.CALIBRATE[0]",
+      "parameters": [
+        {
+          "description": "",
+          "label": "GRAMS=nnn",
+          "optional": false,
+          "tag": "GRAMSnnn",
+          "values": []
+        }
+      ],
+      "related": [],
+      "source": "Klipper",
+      "title": "command",
+      "url": "https://www.klipper3d.org/G-Codes.html#load_cell_calibrate"
+    }
+  ],
   "CENTER": [
     {
       "brief": "An X,Y coordinate for the object.",
@@ -2474,23 +2496,11 @@ const AllGcodes = {
       "url": "https://marlinfw.org/docs/gcode/G029-ubl"
     },
     {
-      "brief": "Probe the bed and enable leveling compensation",
-      "codes": [
-        "G29"
-      ],
-      "id": "Marlin.G29[1]",
-      "parameters": [],
-      "related": [],
-      "source": "Marlin",
-      "title": "Bed Leveling",
-      "url": "https://marlinfw.org/docs/gcode/G029"
-    },
-    {
       "brief": "Probe the bed and enable leveling compensation.",
       "codes": [
         "G29"
       ],
-      "id": "Marlin.G29[2]",
+      "id": "Marlin.G29[1]",
       "parameters": [
         {
           "description": "Abort leveling procedure in-progress (`PROBE_MANUALLY`)",
@@ -2706,7 +2716,7 @@ const AllGcodes = {
       "codes": [
         "G29"
       ],
-      "id": "Marlin.G29[3]",
+      "id": "Marlin.G29[2]",
       "parameters": [
         {
           "description": "Abort leveling procedure in-progress (`PROBE_MANUALLY`)",
@@ -2919,11 +2929,123 @@ const AllGcodes = {
       "url": "https://marlinfw.org/docs/gcode/G029-abl-bilinear"
     },
     {
-      "brief": "Measure Z heights in a grid, enable leveling compensation",
+      "brief": "Probe the bed and enable leveling compensation",
+      "codes": [
+        "G29"
+      ],
+      "id": "Marlin.G29[3]",
+      "parameters": [],
+      "related": [],
+      "source": "Marlin",
+      "title": "Bed Leveling",
+      "url": "https://marlinfw.org/docs/gcode/G029"
+    },
+    {
+      "brief": "Probe the bed and enable leveling compensation.",
       "codes": [
         "G29"
       ],
       "id": "Marlin.G29[4]",
+      "parameters": [
+        {
+          "description": "Abort leveling procedure in-progress (`PROBE_MANUALLY`)",
+          "label": "[A<bool>]",
+          "optional": true,
+          "tag": "A",
+          "values": [
+            {
+              "type": "bool"
+            }
+          ]
+        },
+        {
+          "description": "Create fake points for testing. (`DEBUG_LEVELING_FEATURE`)",
+          "label": "[C<bool>]",
+          "optional": true,
+          "tag": "C",
+          "values": [
+            {
+              "type": "bool"
+            }
+          ]
+        },
+        {
+          "description": "Optional. If leveling is already enabled then exit without leveling. (1.1.9)",
+          "label": "[O]",
+          "optional": true,
+          "tag": "O",
+          "type": "bool"
+        },
+        {
+          "description": "Query the current leveling state (`PROBE_MANUALLY`, `DEBUG_LEVELING_FEATURE`)",
+          "label": "[Q<bool>]",
+          "optional": true,
+          "tag": "Q",
+          "values": [
+            {
+              "type": "bool"
+            }
+          ]
+        },
+        {
+          "description": "- By default G29 will engage the Z probe, test the bed, then disengage.\n- Include \"E\" to engage/disengage the Z probe for each sample.\n- There's no extra effect if you have a fixed Z probe. (without `PROBE_MANUALLY`)\n",
+          "label": "[E<bool>]",
+          "optional": true,
+          "tag": "E",
+          "values": [
+            {
+              "type": "bool"
+            }
+          ]
+        },
+        {
+          "description": "Dry-Run mode. Just probe the grid but don't update the bed leveling data",
+          "label": "[D<bool>]",
+          "optional": true,
+          "tag": "D",
+          "values": [
+            {
+              "type": "bool"
+            }
+          ]
+        },
+        {
+          "description": "Jettison the leveling data stored in SRAM and turn off leveling compensation. Data in EEPROM is not affected.",
+          "label": "[J<bool>]",
+          "optional": true,
+          "tag": "J",
+          "values": [
+            {
+              "type": "bool"
+            }
+          ]
+        },
+        {
+          "description": "Set the verbose level",
+          "label": "[V<0-4>]",
+          "optional": true,
+          "tag": "V",
+          "values": [
+            {
+              "tag": "0-4",
+              "type": "int"
+            }
+          ]
+        }
+      ],
+      "related": [
+        "M420"
+      ],
+      "source": "Marlin",
+      "title": "Bed Leveling (3-Point)",
+      "url": "https://marlinfw.org/docs/gcode/G029-abl-3point"
+    },
+    {
+      "brief": "Measure Z heights in a grid, enable leveling compensation",
+      "codes": [
+        "G29"
+      ],
+      "id": "Marlin.G29[5]",
       "parameters": [
         {
           "description": "",
@@ -3029,106 +3151,6 @@ const AllGcodes = {
       "source": "Marlin",
       "title": "Bed Leveling (Manual)",
       "url": "https://marlinfw.org/docs/gcode/G029-mbl"
-    },
-    {
-      "brief": "Probe the bed and enable leveling compensation.",
-      "codes": [
-        "G29"
-      ],
-      "id": "Marlin.G29[5]",
-      "parameters": [
-        {
-          "description": "Abort leveling procedure in-progress (`PROBE_MANUALLY`)",
-          "label": "[A<bool>]",
-          "optional": true,
-          "tag": "A",
-          "values": [
-            {
-              "type": "bool"
-            }
-          ]
-        },
-        {
-          "description": "Create fake points for testing. (`DEBUG_LEVELING_FEATURE`)",
-          "label": "[C<bool>]",
-          "optional": true,
-          "tag": "C",
-          "values": [
-            {
-              "type": "bool"
-            }
-          ]
-        },
-        {
-          "description": "Optional. If leveling is already enabled then exit without leveling. (1.1.9)",
-          "label": "[O]",
-          "optional": true,
-          "tag": "O",
-          "type": "bool"
-        },
-        {
-          "description": "Query the current leveling state (`PROBE_MANUALLY`, `DEBUG_LEVELING_FEATURE`)",
-          "label": "[Q<bool>]",
-          "optional": true,
-          "tag": "Q",
-          "values": [
-            {
-              "type": "bool"
-            }
-          ]
-        },
-        {
-          "description": "- By default G29 will engage the Z probe, test the bed, then disengage.\n- Include \"E\" to engage/disengage the Z probe for each sample.\n- There's no extra effect if you have a fixed Z probe. (without `PROBE_MANUALLY`)\n",
-          "label": "[E<bool>]",
-          "optional": true,
-          "tag": "E",
-          "values": [
-            {
-              "type": "bool"
-            }
-          ]
-        },
-        {
-          "description": "Dry-Run mode. Just probe the grid but don't update the bed leveling data",
-          "label": "[D<bool>]",
-          "optional": true,
-          "tag": "D",
-          "values": [
-            {
-              "type": "bool"
-            }
-          ]
-        },
-        {
-          "description": "Jettison the leveling data stored in SRAM and turn off leveling compensation. Data in EEPROM is not affected.",
-          "label": "[J<bool>]",
-          "optional": true,
-          "tag": "J",
-          "values": [
-            {
-              "type": "bool"
-            }
-          ]
-        },
-        {
-          "description": "Set the verbose level",
-          "label": "[V<0-4>]",
-          "optional": true,
-          "tag": "V",
-          "values": [
-            {
-              "tag": "0-4",
-              "type": "int"
-            }
-          ]
-        }
-      ],
-      "related": [
-        "M420"
-      ],
-      "source": "Marlin",
-      "title": "Bed Leveling (3-Point)",
-      "url": "https://marlinfw.org/docs/gcode/G029-abl-3point"
     },
     {
       "brief": "This command uses a probe to measure the bed height at 3 or more points to determine its tilt and overall flatness. It then enables compensation so that the nozzle will remain parallel to the bed. The printer must be homed with G28 before using this command.\nEach firmware behaves differently and depends on the type of bed leveling that's been configured. For example, Marlin 1.0.2 provides 3 different types of automatic bed leveling (probe required) and a manual bed leveling option. See your firmware's documentation for the specific options available.",
@@ -4118,53 +4140,11 @@ const AllGcodes = {
   ],
   "G34": [
     {
-      "brief": "Modern replacement for Pr\u016f\u0161a's TMC_Z_CALIBRATION",
-      "codes": [
-        "G34"
-      ],
-      "id": "Marlin.G34[0]",
-      "parameters": [
-        {
-          "description": "Current value to use for the raise move. (Default: `GANTRY_CALIBRATION_CURRENT`)",
-          "label": "[S<int>]",
-          "optional": true,
-          "tag": "S",
-          "values": [
-            {
-              "type": "int",
-              "unit": "mA"
-            }
-          ]
-        },
-        {
-          "description": "Extra distance past `Z_MAX_POS` to move the Z axis. (Default: `GANTRY_CALIBRATION_EXTRA_HEIGHT`)",
-          "label": "[Z<float>]",
-          "optional": true,
-          "tag": "Z",
-          "values": [
-            {
-              "type": "float",
-              "unit": "linear"
-            }
-          ]
-        }
-      ],
-      "related": [
-        "M422",
-        "M906",
-        "M907",
-        "M915"
-      ],
-      "source": "Marlin",
-      "title": "Mechanical Gantry Calibration",
-      "url": "https://marlinfw.org/docs/gcode/G034-mgc"
-    },
-    {
       "brief": "Align multiple Z steppers using a bed probe",
       "codes": [
         "G34"
       ],
-      "id": "Marlin.G34[1]",
+      "id": "Marlin.G34[0]",
       "parameters": [
         {
           "description": "Iterations - must be between 1 - 30",
@@ -4200,6 +4180,48 @@ const AllGcodes = {
       "source": "Marlin",
       "title": "Z Steppers Auto-Alignment",
       "url": "https://marlinfw.org/docs/gcode/G034-zsaa"
+    },
+    {
+      "brief": "Modern replacement for Pr\u016f\u0161a's TMC_Z_CALIBRATION",
+      "codes": [
+        "G34"
+      ],
+      "id": "Marlin.G34[1]",
+      "parameters": [
+        {
+          "description": "Current value to use for the raise move. (Default: `GANTRY_CALIBRATION_CURRENT`)",
+          "label": "[S<int>]",
+          "optional": true,
+          "tag": "S",
+          "values": [
+            {
+              "type": "int",
+              "unit": "mA"
+            }
+          ]
+        },
+        {
+          "description": "Extra distance past `Z_MAX_POS` to move the Z axis. (Default: `GANTRY_CALIBRATION_EXTRA_HEIGHT`)",
+          "label": "[Z<float>]",
+          "optional": true,
+          "tag": "Z",
+          "values": [
+            {
+              "type": "float",
+              "unit": "linear"
+            }
+          ]
+        }
+      ],
+      "related": [
+        "M422",
+        "M906",
+        "M907",
+        "M915"
+      ],
+      "source": "Marlin",
+      "title": "Mechanical Gantry Calibration",
+      "url": "https://marlinfw.org/docs/gcode/G034-mgc"
     },
     {
       "brief": "Use multiple Z steppers and a probe to align Z axis connection points. See M422 for other options.",
@@ -5054,7 +5076,7 @@ const AllGcodes = {
       "url": "https://marlinfw.org/docs/gcode/G053"
     },
     {
-      "brief": "See linuxcnc.org for more help\nNot all builds of RepRapFirmware support these commands. For those that do (e.g. Duet WiFi/Ethernet and Duet 3), from firmware version 2.02 the workplace coordinate offsets are included in the data saved to config-override.g by the M500 command.",
+      "brief": "G53 refers to the native machine coordinate system, while the remaining coordinate systems are typically used to define the offset to the origin of specific parts. \nSee linuxcnc.org for more help\nNot all builds of RepRapFirmware support these commands. For those that do (e.g. Duet WiFi/Ethernet and Duet 3), from firmware version 2.02 the workplace coordinate offsets are included in the data saved to config-override.g by the M500 command.\nMarlin supports these commands when enabled with the #define CNC_COORDINATE_SYSTEMS option in Configuration_adv.h. ",
       "codes": [
         "G53",
         "G54",
@@ -5096,7 +5118,7 @@ const AllGcodes = {
       "url": "https://marlinfw.org/docs/gcode/G054-G059"
     },
     {
-      "brief": "See linuxcnc.org for more help\nNot all builds of RepRapFirmware support these commands. For those that do (e.g. Duet WiFi/Ethernet and Duet 3), from firmware version 2.02 the workplace coordinate offsets are included in the data saved to config-override.g by the M500 command.",
+      "brief": "G53 refers to the native machine coordinate system, while the remaining coordinate systems are typically used to define the offset to the origin of specific parts. \nSee linuxcnc.org for more help\nNot all builds of RepRapFirmware support these commands. For those that do (e.g. Duet WiFi/Ethernet and Duet 3), from firmware version 2.02 the workplace coordinate offsets are included in the data saved to config-override.g by the M500 command.\nMarlin supports these commands when enabled with the #define CNC_COORDINATE_SYSTEMS option in Configuration_adv.h. ",
       "codes": [
         "G53",
         "G54",
@@ -5138,7 +5160,7 @@ const AllGcodes = {
       "url": "https://marlinfw.org/docs/gcode/G054-G059"
     },
     {
-      "brief": "See linuxcnc.org for more help\nNot all builds of RepRapFirmware support these commands. For those that do (e.g. Duet WiFi/Ethernet and Duet 3), from firmware version 2.02 the workplace coordinate offsets are included in the data saved to config-override.g by the M500 command.",
+      "brief": "G53 refers to the native machine coordinate system, while the remaining coordinate systems are typically used to define the offset to the origin of specific parts. \nSee linuxcnc.org for more help\nNot all builds of RepRapFirmware support these commands. For those that do (e.g. Duet WiFi/Ethernet and Duet 3), from firmware version 2.02 the workplace coordinate offsets are included in the data saved to config-override.g by the M500 command.\nMarlin supports these commands when enabled with the #define CNC_COORDINATE_SYSTEMS option in Configuration_adv.h. ",
       "codes": [
         "G53",
         "G54",
@@ -5180,7 +5202,7 @@ const AllGcodes = {
       "url": "https://marlinfw.org/docs/gcode/G054-G059"
     },
     {
-      "brief": "See linuxcnc.org for more help\nNot all builds of RepRapFirmware support these commands. For those that do (e.g. Duet WiFi/Ethernet and Duet 3), from firmware version 2.02 the workplace coordinate offsets are included in the data saved to config-override.g by the M500 command.",
+      "brief": "G53 refers to the native machine coordinate system, while the remaining coordinate systems are typically used to define the offset to the origin of specific parts. \nSee linuxcnc.org for more help\nNot all builds of RepRapFirmware support these commands. For those that do (e.g. Duet WiFi/Ethernet and Duet 3), from firmware version 2.02 the workplace coordinate offsets are included in the data saved to config-override.g by the M500 command.\nMarlin supports these commands when enabled with the #define CNC_COORDINATE_SYSTEMS option in Configuration_adv.h. ",
       "codes": [
         "G53",
         "G54",
@@ -5222,7 +5244,7 @@ const AllGcodes = {
       "url": "https://marlinfw.org/docs/gcode/G054-G059"
     },
     {
-      "brief": "See linuxcnc.org for more help\nNot all builds of RepRapFirmware support these commands. For those that do (e.g. Duet WiFi/Ethernet and Duet 3), from firmware version 2.02 the workplace coordinate offsets are included in the data saved to config-override.g by the M500 command.",
+      "brief": "G53 refers to the native machine coordinate system, while the remaining coordinate systems are typically used to define the offset to the origin of specific parts. \nSee linuxcnc.org for more help\nNot all builds of RepRapFirmware support these commands. For those that do (e.g. Duet WiFi/Ethernet and Duet 3), from firmware version 2.02 the workplace coordinate offsets are included in the data saved to config-override.g by the M500 command.\nMarlin supports these commands when enabled with the #define CNC_COORDINATE_SYSTEMS option in Configuration_adv.h. ",
       "codes": [
         "G53",
         "G54",
@@ -5264,7 +5286,7 @@ const AllGcodes = {
       "url": "https://marlinfw.org/docs/gcode/G054-G059"
     },
     {
-      "brief": "See linuxcnc.org for more help\nNot all builds of RepRapFirmware support these commands. For those that do (e.g. Duet WiFi/Ethernet and Duet 3), from firmware version 2.02 the workplace coordinate offsets are included in the data saved to config-override.g by the M500 command.",
+      "brief": "G53 refers to the native machine coordinate system, while the remaining coordinate systems are typically used to define the offset to the origin of specific parts. \nSee linuxcnc.org for more help\nNot all builds of RepRapFirmware support these commands. For those that do (e.g. Duet WiFi/Ethernet and Duet 3), from firmware version 2.02 the workplace coordinate offsets are included in the data saved to config-override.g by the M500 command.\nMarlin supports these commands when enabled with the #define CNC_COORDINATE_SYSTEMS option in Configuration_adv.h. ",
       "codes": [
         "G53",
         "G54",
@@ -5306,7 +5328,7 @@ const AllGcodes = {
       "url": "https://marlinfw.org/docs/gcode/G054-G059"
     },
     {
-      "brief": "See linuxcnc.org for more help\nNot all builds of RepRapFirmware support these commands. For those that do (e.g. Duet WiFi/Ethernet and Duet 3), from firmware version 2.02 the workplace coordinate offsets are included in the data saved to config-override.g by the M500 command.",
+      "brief": "G53 refers to the native machine coordinate system, while the remaining coordinate systems are typically used to define the offset to the origin of specific parts. \nSee linuxcnc.org for more help\nNot all builds of RepRapFirmware support these commands. For those that do (e.g. Duet WiFi/Ethernet and Duet 3), from firmware version 2.02 the workplace coordinate offsets are included in the data saved to config-override.g by the M500 command.\nMarlin supports these commands when enabled with the #define CNC_COORDINATE_SYSTEMS option in Configuration_adv.h. ",
       "codes": [
         "G53",
         "G54",
@@ -14050,10 +14072,17 @@ const AllGcodes = {
           "values": []
         },
         {
-          "description": " (Optional, RepRapFirmware only) Proportion of the first move to be skipped, default 0.0, must be less than 1.0",
+          "description": " (Optional, RepRapFirmware only) Fraction of the first move to be skipped, default 0.0, must be less than 1.0",
           "label": "Pnnn",
           "optional": true,
           "tag": "P",
+          "values": []
+        },
+        {
+          "description": " (Optional, RepRapFirmware only) If the command at the specified file position is a G2 or G3 command and the P parameter is nonzero then two of these (e.g. X and Y if the XY plane is selected) are used to provide the coordinates of the centre of the arc.",
+          "label": "Xnnn,Ynnn,Znnn",
+          "optional": true,
+          "tag": "X",
           "values": []
         }
       ],
@@ -19536,50 +19565,57 @@ const AllGcodes = {
       "id": "Marlin.M493[0]",
       "parameters": [
         {
-          "description": "Set the current motion mode and/or Input Shaper.",
-          "label": "[S<0|1|10|11|12|13|14|15|16|17>]",
+          "description": "Set Fixed-Time motion mode OFF (0) / ON (1).",
+          "label": "[S<bool>]",
           "optional": true,
           "tag": "S",
           "values": [
             {
-              "description": "Standard Motion",
+              "tag": "bool"
+            }
+          ]
+        },
+        {
+          "description": "Set the vibration compensator [input shaper] mode for X / Y axis. Note. Users and slicers must remember to set the mode for both axes!",
+          "label": "[X|Y<0|1|2|3|4|5|6|7|8>]",
+          "optional": true,
+          "tag": "X|Y",
+          "values": [
+            {
+              "description": "NONE (No input shaper)",
               "tag": 0
             },
             {
-              "description": "Fixed-Time Motion",
+              "description": "ZV (Zero Vibration)",
               "tag": 1
             },
             {
-              "description": "ZV Input Shaping",
-              "tag": 10
+              "description": "ZVD (Zero Vibration and Derivative)",
+              "tag": 2
             },
             {
-              "description": "ZVD Input Shaping",
-              "tag": 11
+              "description": "ZVDD (Zero Vibration, Derivative, and Double Derivative)",
+              "tag": 3
             },
             {
-              "description": "ZVDD Input Shaping",
-              "tag": 12
+              "description": "ZVDDD (Zero Vibration, Derivative, Double Derivative, and Triple Derivative)",
+              "tag": 4
             },
             {
-              "description": "ZVDDD Input Shaping",
-              "tag": 13
+              "description": "EI (Extra-Intensive)",
+              "tag": 5
             },
             {
-              "description": "EI Input Shaping",
-              "tag": 14
+              "description": "2HEI (2-Hump Extra-Intensive)",
+              "tag": 6
             },
             {
-              "description": "2HEI Input Shaping",
-              "tag": 15
+              "description": "3HEI (3-Hump Extra-Intensive)",
+              "tag": 7
             },
             {
-              "description": "3HEI Input Shaping",
-              "tag": 16
-            },
-            {
-              "description": "MZV Input Shaping",
-              "tag": 17
+              "description": "MZV (Mass-based Zero Vibration)",
+              "tag": 8
             }
           ]
         },
@@ -20256,6 +20292,37 @@ const AllGcodes = {
     }
   ],
   "M550": [
+    {
+      "brief": "Set / report the Machine Name",
+      "codes": [
+        "M550"
+      ],
+      "id": "Marlin.M550[0]",
+      "parameters": [
+        {
+          "description": "Set the Machine Name using a string parameter.",
+          "label": "[P<name>]",
+          "optional": true,
+          "tag": "P",
+          "values": [
+            {
+              "tag": "name",
+              "type": "string"
+            }
+          ]
+        },
+        {
+          "description": "Set the Machine Name using a loose string parameter. Must be a quoted string if it starts with \"P.\"",
+          "label": "[string]",
+          "optional": true,
+          "tag": "string"
+        }
+      ],
+      "related": [],
+      "source": "Marlin",
+      "title": "Machine Name",
+      "url": "https://marlinfw.org/docs/gcode/M550"
+    },
     {
       "brief": "",
       "codes": [
@@ -28175,7 +28242,7 @@ const AllGcodes = {
       "url": "https://marlinfw.org/docs/gcode/M906"
     },
     {
-      "brief": "",
+      "brief": "Set the currents to send to the stepper motors for each axis. The values are the peak current per phase in milliamps (mA).",
       "codes": [
         "M906"
       ],
@@ -28183,58 +28250,30 @@ const AllGcodes = {
       "parameters": [
         {
           "description": " X drive motor current",
-          "label": "Xnnn",
+          "label": "X[current]",
           "optional": true,
           "tag": "X",
           "values": []
         },
         {
           "description": " Y drive motor current",
-          "label": "Ynnn",
+          "label": "Y[current]",
           "optional": true,
           "tag": "Y",
           "values": []
         },
         {
           "description": " Z drive motor current",
-          "label": "Znnn",
+          "label": "Z[current]",
           "optional": true,
           "tag": "Z",
           "values": []
         },
         {
           "description": " E drive(s) motor current(s)",
-          "label": "Ennn",
+          "label": "E[current]",
           "optional": true,
           "tag": "E",
-          "values": []
-        },
-        {
-          "description": " Motor idle current in percent (0..100)",
-          "label": "Innn",
-          "optional": true,
-          "tag": "I",
-          "values": []
-        },
-        {
-          "description": "In Marlin , Y, Z are the same as above, in addition to the following Parameters",
-          "label": "X",
-          "optional": true,
-          "tag": "X",
-          "values": []
-        },
-        {
-          "description": " to specify index for additional motors, such as I2 to set current for X2,Y2,Z2",
-          "label": "In",
-          "optional": true,
-          "tag": "I",
-          "values": []
-        },
-        {
-          "description": " to set tool number for the E axis",
-          "label": "Tn",
-          "optional": true,
-          "tag": "T",
           "values": []
         }
       ],
@@ -28690,6 +28729,18 @@ const AllGcodes = {
       "source": "RepRap",
       "title": "M911: Set TMC2130 holding currents",
       "url": "https://reprap.org/wiki/G-code#M911:_Set_TMC2130_holding_currents"
+    },
+    {
+      "brief": "(Does not apply to STANDALONE stepper drivers.)\nReport TMC stepper driver Overtemperature Pre-Warn flag. This flag is held by the TMCStepper library, persisting until cleared by M912.",
+      "codes": [
+        "M911"
+      ],
+      "id": "RepRap.M911[2]",
+      "parameters": [],
+      "related": [],
+      "source": "RepRap",
+      "title": "M911: Report TMC Overtemperature Pre-Warn",
+      "url": "https://reprap.org/wiki/G-code#M911:_Report_TMC_Overtemperature_Pre-Warn"
     }
   ],
   "M912": [
@@ -28809,6 +28860,26 @@ const AllGcodes = {
       "source": "RepRap",
       "title": "M912: Set TMC2130 running currents",
       "url": "https://reprap.org/wiki/G-code#M912:_Set_TMC2130_running_currents"
+    },
+    {
+      "brief": "(Does not apply to STANDALONE stepper drivers.)\nClear TMC stepper driver Overtemperature Pre-Warn flags held by the TMCStepper library. Specify one or more axes \"by name\" using parameters and values. If no axes are given, clear all pre-warn flags. Report the current state of these flags with M911.",
+      "codes": [
+        "M912"
+      ],
+      "id": "RepRap.M912[2]",
+      "parameters": [
+        {
+          "description": " Flags for axes to clear. Include an index to specify just one axis stepper driver.",
+          "label": "X[index], Y[index], ...",
+          "optional": true,
+          "tag": "X",
+          "values": []
+        }
+      ],
+      "related": [],
+      "source": "RepRap",
+      "title": "M912: Clear TMC Overtemperature Pre-Warn",
+      "url": "https://reprap.org/wiki/G-code#M912:_Clear_TMC_Overtemperature_Pre-Warn"
     }
   ],
   "M913": [
@@ -28984,11 +29055,52 @@ const AllGcodes = {
       "url": "https://reprap.org/wiki/G-code#M913:_Set_motor_percentage_of_normal_current"
     },
     {
-      "brief": ":Not active in default, only if TMC2130_SERVICE_CODES_M910_M918 is defined in source code.",
+      "brief": "",
       "codes": [
         "M913"
       ],
       "id": "RepRap.M913[1]",
+      "parameters": [
+        {
+          "description": " Provide threshold values for one or more axes",
+          "label": "X Y Z A B C U V W",
+          "optional": true,
+          "tag": "X",
+          "values": []
+        },
+        {
+          "description": " One-based index for multi-stepper axes, if only one stepper in the axis should be modified (Default: change all)",
+          "label": "I",
+          "optional": true,
+          "tag": "I",
+          "values": []
+        },
+        {
+          "description": " Provide a threshold value for one or more extruders / tools",
+          "label": "E",
+          "optional": true,
+          "tag": "E",
+          "values": []
+        },
+        {
+          "description": " Zero-based index of the extruder / tool, if only one should be modified (Default: change all)",
+          "label": "T",
+          "optional": true,
+          "tag": "T",
+          "values": []
+        }
+      ],
+      "related": [],
+      "source": "RepRap",
+      "title": "M913: Set Hybrid (PWM) Threshold",
+      "url": "https://reprap.org/wiki/G-code#M913:_Set_Hybrid_.28PWM.29_Threshold"
+    },
+    {
+      "brief": ":Not active in default, only if TMC2130_SERVICE_CODES_M910_M918 is defined in source code.",
+      "codes": [
+        "M913"
+      ],
+      "id": "RepRap.M913[2]",
       "parameters": [],
       "related": [],
       "source": "RepRap",
@@ -29187,6 +29299,33 @@ const AllGcodes = {
       "source": "RepRap",
       "title": "M914: Set TMC2130 normal mode",
       "url": "https://reprap.org/wiki/G-code#M914:_Set_TMC2130_normal_mode"
+    },
+    {
+      "brief": "",
+      "codes": [
+        "M914"
+      ],
+      "id": "RepRap.M914[2]",
+      "parameters": [
+        {
+          "description": " Provide current values for one or more axes",
+          "label": "X Y Z A B C U V W",
+          "optional": true,
+          "tag": "X",
+          "values": []
+        },
+        {
+          "description": " One-based index for multi-stepper axes, if only one stepper in the axis should be modified (default: change all)",
+          "label": "I",
+          "optional": true,
+          "tag": "I",
+          "values": []
+        }
+      ],
+      "related": [],
+      "source": "RepRap",
+      "title": "M914: Set StallGuard sensitivity (Homing Threshold)",
+      "url": "https://reprap.org/wiki/G-code#M914:_Set_StallGuard_sensitivity_.28Homing_Threshold.29"
     }
   ],
   "M915": [
@@ -30055,6 +30194,61 @@ const AllGcodes = {
       "source": "Marlin",
       "title": "TMC Chopper Timing",
       "url": "https://marlinfw.org/docs/gcode/M919"
+    },
+    {
+      "brief": "(Does not apply to STANDALONE stepper drivers.)\nSet or report Chopper Times for all Trinamic stepper drivers. Refer to Marlin configurations, the TMCStepper library, and Trinamic datasheets for information on how these values work.\nSend M919 with no parameters report Chopper Times for all axes.",
+      "codes": [
+        "M919"
+      ],
+      "id": "RepRap.M919[0]",
+      "parameters": [
+        {
+          "description": " Flags for all axis steppers that will be set",
+          "label": "X Y Z A B C U V W",
+          "optional": true,
+          "tag": "X",
+          "values": []
+        },
+        {
+          "description": " Zero-based index for multi-stepper axes (I0 for X1, Y1 ; I1 for X2, Y2 ; etc.). Omit to apply to all axis steppers.",
+          "label": "I[index]",
+          "optional": true,
+          "tag": "I",
+          "values": []
+        },
+        {
+          "description": " Zero-based extruder/tool index. Omit for all extruders.",
+          "label": "T[index]",
+          "optional": true,
+          "tag": "T",
+          "values": []
+        },
+        {
+          "description": " Time-off value (1..15)",
+          "label": "O",
+          "optional": true,
+          "tag": "O",
+          "values": []
+        },
+        {
+          "description": " Hysteresis Start (1..8)",
+          "label": "S",
+          "optional": true,
+          "tag": "S",
+          "values": []
+        },
+        {
+          "description": " Hysteresis End (-3..12)",
+          "label": "P",
+          "optional": true,
+          "tag": "P",
+          "values": []
+        }
+      ],
+      "related": [],
+      "source": "RepRap",
+      "title": "M919: TMC Chopper Time",
+      "url": "https://reprap.org/wiki/G-code#M919:_TMC_Chopper_Time"
     }
   ],
   "M92": [
@@ -30262,6 +30456,56 @@ const AllGcodes = {
       "source": "RepRap",
       "title": "M92: Set axis_steps_per_unit",
       "url": "https://reprap.org/wiki/G-code#M92:_Set_axis_steps_per_unit"
+    }
+  ],
+  "M920": [
+    {
+      "brief": "(Does not apply to STANDALONE stepper drivers.)\nSet or report the firmware Homing Current settings for all Trinamic stepper drivers. All values are in milliamps (mA). Homing Current should be adjusted in conjunction with StallGuard Threshold and Homing Speed to achieve reliable sensorless homing. Refer to Marlin example configurations to find suitable starting values for your hardware.\nSend M920 with no parameters report the Homing Current for all axes.",
+      "codes": [
+        "M920"
+      ],
+      "id": "RepRap.M920[0]",
+      "parameters": [
+        {
+          "description": " Current in mA to set for X stepper driver(s)",
+          "label": "X[current]",
+          "optional": true,
+          "tag": "X",
+          "values": []
+        },
+        {
+          "description": " Current in mA to set for Y stepper driver(s)",
+          "label": "Y[current]",
+          "optional": true,
+          "tag": "Y",
+          "values": []
+        },
+        {
+          "description": " Current in mA to set for Z stepper driver(s)",
+          "label": "Z[current]",
+          "optional": true,
+          "tag": "Z",
+          "values": []
+        },
+        {
+          "description": " And the same for any other axes\u2026",
+          "label": "...ABCUVW...",
+          "optional": true,
+          "tag": ".",
+          "values": []
+        },
+        {
+          "description": " Zero-based index for multi-stepper axes (I0 for X1, Y1 ; I1 for X2, Y2 ; etc.). Omit to apply to all axis steppers.",
+          "label": "I[index]",
+          "optional": true,
+          "tag": "I",
+          "values": []
+        }
+      ],
+      "related": [],
+      "source": "RepRap",
+      "title": "M920: TMC Homing Current",
+      "url": "https://reprap.org/wiki/G-code#M920:_TMC_Homing_Current"
     }
   ],
   "M928": [
@@ -31450,6 +31694,20 @@ const AllGcodes = {
       "source": "Marlin",
       "title": "MMU2 Special Commands",
       "url": "https://marlinfw.org/docs/gcode/T-mmu2"
+    }
+  ],
+  "TARE": [
+    {
+      "brief": "command",
+      "codes": [
+        "TARE"
+      ],
+      "id": "Klipper.TARE[0]",
+      "parameters": [],
+      "related": [],
+      "source": "Klipper",
+      "title": "command",
+      "url": "https://www.klipper3d.org/G-Codes.html#load_cell_calibrate"
     }
   ],
   "TESTZ": [
